@@ -1,0 +1,263 @@
+---
+// src/pages/404.astro
+import Layout from '../layouts/Landing.astro';
+import { Image } from 'astro:assets';
+import mintNetworkLogo from '../assets/images/logo_mini.png';
+---
+
+<Layout title="Page Not Found - 404" description="The page you're looking for doesn't exist.">
+  <main class="min-h-screen bg-radial-dark space-bg relative overflow-hidden">
+    <!-- tsParticles background -->
+    <div id="tsparticles"></div>
+    
+    <!-- Main content -->
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+      <div class="text-center animate-fade-in">
+        
+        <!-- Logo -->
+        <div class="mb-8">
+          <Image 
+            src={mintNetworkLogo}
+            alt="Mint Network"
+            class="logo-mini mx-auto mb-6"
+            width={80}
+            height={80}
+            densities={[1, 2, 3]}
+            loading="eager"
+            format="webp"
+            quality={90}
+          />
+        </div>
+        
+        <!-- 404 -->
+        <h1 class="error-text font-heading font-bold text-transparent bg-clip-text bg-gradient-royal mb-8">
+          404
+        </h1>
+        
+        <!-- Message -->
+        <p class="message-text text-text-secondary mb-12 max-w-md mx-auto">
+          This page doesn't exist in our universe.
+        </p>
+        
+        <!-- Return Button -->
+        <a 
+          href="/" 
+          class="glass-card inline-flex items-center gap-3 return-btn"
+        >
+          <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4h4v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354l-6-6z"/>
+          </svg>
+          <span>Return to Hub</span>
+        </a>
+        
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* 404 text sizing */
+  .error-text {
+    font-size: 8rem; /* 128px */
+    line-height: 1;
+  }
+  
+  @media (min-width: 768px) {
+  .error-text {
+      font-size: 12rem; /* 192px */
+  }
+  }
+  
+  /* Message text sizing */
+  .message-text {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.5;
+  }
+  
+  @media (min-width: 768px) {
+    .message-text {
+        font-size: 1.5rem; /* 24px */
+    }
+  }
+  
+  /* Button text sizing */
+  .return-btn {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 500;
+  }
+  
+  /* Glass card styling */
+  .glass-card {
+    background: rgba(45, 45, 68, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(154, 10, 171, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #f8f8ff;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(154, 10, 171, 0.1);
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: rgba(45, 45, 68, 0.3);
+    border-color: rgba(154, 10, 171, 0.4);
+    box-shadow: 0 8px 25px rgba(154, 10, 171, 0.2);
+    color: #f8f8ff;
+  }
+  
+  .glass-card:active {
+    transform: translateY(0px) scale(1);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Logo styling */
+  .logo-mini {
+    filter: drop-shadow(0 8px 20px rgba(154, 10, 171, 0.4));
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: logoFloat 6s ease-in-out infinite;
+  }
+  
+  .logo-mini:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 12px 30px rgba(154, 10, 171, 0.6));
+  }
+  
+  @keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.02);
+    }
+  }
+  
+  /* 404 text glow effect */
+  .error-text {
+    position: relative;
+  }
+  
+  .error-text::before {
+    content: '404';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #9a0aab 0%, #b83cc7 50%, #c45adb 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: blur(10px);
+    opacity: 0.7;
+    z-index: -1;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  /* Fade in animation */
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+  }
+</style>
+
+<script>
+  // Initialize tsParticles
+  async function initParticles() {
+    if (typeof tsParticles === 'undefined') {
+      console.warn('tsParticles not loaded');
+      return;
+    }
+
+    try {
+      await tsParticles.load("tsparticles", {
+        background: {
+          color: "transparent"
+        },
+        fpsLimit: 60,
+        particles: {
+          color: {
+            value: "#9a0aab"
+          },
+          move: {
+            enable: true,
+            speed: 0.5,
+            direction: "none",
+            random: true,
+            straight: false,
+            outMode: "bounce"
+          },
+          number: {
+            value: 30,
+            density: {
+              enable: true,
+              value_area: 2000
+            }
+          },
+          opacity: {
+            value: 0.5,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 0.5,
+              opacity_min: 0.1
+            }
+          },
+          shape: {
+            type: "circle"
+          },
+          size: {
+            value: 2,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              size_min: 0.5
+            }
+          }
+        },
+        interactivity: {
+          events: {
+            onhover: {
+              enable: true,
+              mode: "grab"
+            }
+          },
+          modes: {
+            grab: {
+              distance: 120,
+              line_linked: {
+                opacity: 0.1
+              }
+            }
+          }
+        },
+        retina_detect: true
+      });
+      
+    } catch (error) {
+      console.error('Failed to initialize tsParticles:', error);
+      const container = document.getElementById('tsparticles');
+      if (container) {
+        container.style.display = 'none';
+      }
+    }
+  }
+  
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initParticles, 200);
+  });
+</script>

@@ -1,0 +1,69 @@
+---
+// src/layouts/LegalDocument.astro
+import Layout from './Landing.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    lastUpdated: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { title, lastUpdated, description } = frontmatter;
+---
+
+<Layout title={title} description={description}>
+  <main class="min-h-screen bg-radial-dark">
+    <!-- Content wrapper -->
+    <div class="container mx-auto px-4 py-16">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Document Header -->
+        <header class="text-center mb-12">
+          <div class="w-32 h-1 bg-gradient-royal mx-auto mb-6 rounded-full"></div>
+          <h1 class="text-4xl md:text-5xl font-heading font-bold text-text-primary mb-4">
+            {title}
+          </h1>
+          {description && (
+            <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+              {description}
+            </p>
+          )}
+        </header>
+        
+        <!-- Document Content -->
+        <article class="bg-dark-medium/20 backdrop-blur-md rounded-2xl border border-royal-primary/20 overflow-hidden">
+          <div class="prose prose-lg max-w-none p-8 md:p-12">
+            <slot />
+          </div>
+          
+          <!-- Last Updated Footer -->
+          <footer class="px-8 md:px-12 pb-8 border-t border-royal-primary/10">
+            <p class="text-sm text-text-muted text-center mt-6">
+              Last updated: {lastUpdated}
+            </p>
+          </footer>
+        </article>
+        
+        <!-- Back to Home Link -->
+        <div class="text-center mt-8">
+          <a 
+            href="/" 
+            class="inline-flex items-center gap-2 text-royal-primary hover:text-royal-secondary transition-colors"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM7.5 3.5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1H8v2a.5.5 0 0 1-1 0V7H5a.5.5 0 0 1 0-1h2V4a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+            Back to Home
+          </a>
+        </div>
+        
+      </div>
+    </div>
+    
+    <Footer />
+  </main>
+</Layout>

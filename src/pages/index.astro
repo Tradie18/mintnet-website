@@ -1,0 +1,424 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Landing.astro';
+import MinecraftItem from '../components/MinecraftItem.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import { navigationItems } from '../config/site.ts';
+import mintNetworkLogo from '../assets/images/logo_full.png';
+---
+
+<Layout title="Mint Network">
+  <main class="min-h-screen bg-radial-dark space-bg relative overflow-hidden">
+    <!-- tsParticles background -->
+    <div id="tsparticles"></div>
+    
+    <!-- Main content -->
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
+      
+      <!-- Hero Section -->
+      <div class="text-center mb-16 animate-fade-in">
+        <div class="mb-8">
+          <!-- Animated Logo -->
+          <div class="logo-container mb-6">
+            <Image 
+              src={mintNetworkLogo}
+              alt="Mint Network"
+              class="logo-main mx-auto"
+              width={400}
+              height={200}
+              densities={[1, 2, 3]}
+              loading="eager"
+              format="webp"
+              quality={90}
+            />
+          </div>
+          <div class="w-32 h-1 bg-gradient-royal mx-auto mb-6 rounded-full"></div>
+          <p class="text-2xl md:text-3xl text-text-secondary mb-4 font-light">
+            Where creativity meets adventure
+          </p>
+          <p class="text-lg text-text-muted max-w-2xl mx-auto">
+            Join our thriving Minecraft community and explore worlds limited only by your imagination
+          </p>
+        </div>
+        
+        <!-- Server IP Display -->
+        <div 
+          class="server-ip-block bg-dark-medium/20 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto mb-12 glow-royal border border-royal-primary/20 cursor-pointer transition-all duration-300 hover:bg-dark-light/30 hover:border-royal-primary/40"
+          onclick="copyServerIP(this)"
+        >
+          <p class="text-text-secondary mb-3 text-sm uppercase tracking-wide">Connect Now</p>
+          <code class="text-royal-primary font-mono text-xl md:text-2xl font-bold block select-all">
+            play.mint-network.co
+          </code>
+          <p class="text-text-muted text-xs mt-2 opacity-70">
+            Click to copy
+          </p>
+        </div>
+      </div>
+      
+      <!-- Navigation Grid -->
+      <div class="navigation-grid w-full max-w-4xl mb-16">
+        
+        <!-- Vote -->
+        <a href="/vote" class="nav-card group">
+          <div class="text-center">
+            <MinecraftItem 
+              src="/images/item-textures/nether-star.png" 
+              alt="Vote for us"
+              width={80}
+              height={80}
+              enableGlint={true}
+              rotationOffset={60}
+              size={12}
+              className="mb-4 mx-auto"
+            />
+            <h3 class="text-lg font-heading font-semibold text-text-primary mb-2">Vote</h3>
+            <p class="text-sm text-text-muted">Help us grow</p>
+          </div>
+        </a>
+        
+        <!-- Store -->
+        <a href="/store" class="nav-card group">
+          <div class="text-center">
+            <MinecraftItem 
+              src="/images/item-textures/emerald.png" 
+              alt="Store"
+              width={80}
+              height={80}
+              enableGlint={true}
+              rotationOffset={120}
+              size={12}
+              className="mb-4 mx-auto"
+            />
+            <h3 class="text-lg font-heading font-semibold text-text-primary mb-2">Store</h3>
+            <p class="text-sm text-text-muted">Support the network</p>
+          </div>
+        </a>
+        
+        <!-- Discord -->
+        <a href="https://discord.gg/Un9YA5Z" class="nav-card group" target="_blank" rel="noopener noreferrer">
+          <div class="text-center">
+            <MinecraftItem 
+              src="/images/item-textures/wumpus.png" 
+              alt="Discord Community"
+              width={80}
+              height={80}
+              enableGlint={false}
+              rotationOffset={180}
+              size={12}
+              className="mb-4 mx-auto"
+            />
+            <h3 class="text-lg font-heading font-semibold text-text-primary mb-2">Discord</h3>
+            <p class="text-sm text-text-muted">Join the community</p>
+          </div>
+        </a>
+        
+      </div>
+      
+    </div>
+    
+    <!-- Footer -->
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  /* Server IP Block Styling */
+  .server-ip-block {
+    user-select: none; /* Prevent text selection on the container */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .server-ip-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(154, 10, 171, 0.3);
+  }
+  
+  .server-ip-block:active {
+    transform: translateY(0px);
+    transition: transform 0.1s ease;
+  }
+  
+  .server-ip-block code {
+    user-select: all; /* Allow text selection on the IP itself */
+    pointer-events: none; /* Prevent code from interfering with click */
+  }
+  
+  /* Modern CSS Grid Navigation */
+  .navigation-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: single column, full width */
+    gap: 1.5rem;
+    width: 100%;
+  }
+  
+  /* Desktop: 3 equal columns */
+  @media (min-width: 768px) {
+    .navigation-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+  
+  .nav-card {
+    @apply bg-dark-medium/20 backdrop-blur-md rounded-2xl p-6 transition-all duration-500 ease-in-out;
+    @apply hover:scale-105 hover:bg-dark-light/30;
+    @apply border border-royal-primary/20 hover:border-royal-primary/40;
+    @apply hover:shadow-2xl;
+    
+    /* Ensure full width within grid cell */
+    width: 100%;
+    justify-self: stretch;
+  }
+  
+  .logo-container {
+    animation: float 6s ease-in-out infinite;
+    transform-origin: center;
+  }
+  
+  .logo-main {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 25px rgba(154, 10, 171, 0.3));
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: logoBreath 8s ease-in-out infinite;
+  }
+  
+  .logo-main:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 15px 35px rgba(154, 10, 171, 0.5));
+  }
+  
+  .nav-card:hover {
+    box-shadow: 0 20px 40px rgba(154, 10, 171, 0.2);
+  }
+  
+  .nav-card:hover .minecraft-item-container {
+    transform: scale(1.1) rotateY(10deg);
+  }
+  
+  /* Staggered animation delays */
+  .nav-card:nth-child(1) { animation-delay: 0.1s; }
+  .nav-card:nth-child(2) { animation-delay: 0.2s; }
+  .nav-card:nth-child(3) { animation-delay: 0.3s; }
+  .nav-card:nth-child(4) { animation-delay: 0.4s; }
+  .nav-card:nth-child(5) { animation-delay: 0.5s; }
+  .nav-card:nth-child(6) { animation-delay: 0.6s; }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  
+  @keyframes logoBreath {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  .nav-card {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  /* Responsive logo sizing */
+  @media (max-width: 768px) {
+    .logo-main {
+      width: 300px;
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .logo-main {
+      width: 250px;
+      height: auto;
+    }
+  }
+</style>
+
+<script>
+// Extend Window interface for TypeScript
+declare global {
+  interface Window {
+    copyServerIP: (element: HTMLElement) => Promise<void>;
+  }
+}
+
+  // Initialize tsParticles with simplified, stable configuration
+  async function initParticles() {
+    if (typeof tsParticles === 'undefined') {
+      console.warn('tsParticles not loaded');
+      return;
+    }
+
+    try {
+      // Use a much simpler, more compatible configuration
+      await tsParticles.load("tsparticles", {
+        background: {
+          color: "transparent"
+        },
+        fpsLimit: 60,
+        particles: {
+          color: {
+            value: "#9a0aab"
+          },
+          move: {
+            enable: true,
+            speed: 0.5,
+            direction: "none",
+            random: true,
+            straight: false,
+            outMode: "bounce"
+          },
+          number: {
+            value: 60,
+            density: {
+              enable: true,
+              value_area: 2000
+            }
+          },
+          opacity: {
+            value: 0.7,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 0.5,
+              opacity_min: 0.2
+            }
+          },
+          shape: {
+            type: "circle"
+          },
+          size: {
+            value: 2,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              size_min: 0.5
+            }
+          }
+        },
+        interactivity: {
+          events: {
+            onhover: {
+              enable: true,
+              mode: "grab"
+            }
+          },
+          modes: {
+            grab: {
+              distance: 120,
+              line_linked: {
+                opacity: 0.1
+              }
+            }
+          }
+        },
+        retina_detect: true
+      });
+      
+      console.log('tsParticles initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize tsParticles:', error);
+      // Fallback: remove the particles container if it fails
+      const container = document.getElementById('tsparticles');
+      if (container) {
+        container.style.display = 'none';
+      }
+    }
+  }
+  
+  // Copy server IP functionality
+  window.copyServerIP = async function(element) {
+    try {
+      await navigator.clipboard.writeText('play.mint-network.co');
+      
+      // Visual feedback
+      const originalBg = element.style.backgroundColor;
+      const statusText = element.querySelector('p:last-child');
+      const originalStatusText = statusText ? statusText.textContent : '';
+      
+      element.style.backgroundColor = 'rgba(0, 168, 107, 0.1)';
+      element.style.borderColor = '#00a86b';
+      if (statusText) {
+        statusText.textContent = 'Copied to clipboard!';
+        (statusText as HTMLElement).style.color = '#00a86b';
+      }
+      
+      setTimeout(() => {
+        element.style.backgroundColor = originalBg;
+        element.style.borderColor = '';
+        if (statusText) {
+          statusText.textContent = originalStatusText;
+          (statusText as HTMLElement).style.color = '';
+        }
+      }, 2000);
+      
+    } catch (err) {
+      console.log('Copy failed:', err);
+      // Fallback visual feedback
+      const statusText = element.querySelector('p:last-child');
+      const originalText = statusText ? statusText.textContent : '';
+      if (statusText) {
+        statusText.textContent = 'Copy failed - please select manually';
+        setTimeout(() => {
+          statusText.textContent = originalText;
+        }, 3000);
+      }
+    }
+  };
+  
+  // Copy to clipboard functionality (legacy - for other potential uses)
+  function setupCopyButton() {
+    const copyButtons = document.querySelectorAll('[onclick*="clipboard"]');
+    copyButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('play.mint-network.co');
+          const originalText = button.textContent;
+          button.textContent = 'Copied!';
+          (button as HTMLElement).style.color = '#00a86b';
+          
+          setTimeout(() => {
+            button.textContent = originalText;
+            (button as HTMLElement).style.color = '';
+          }, 2000);
+        } catch (err) {
+          console.log('Copy failed:', err);
+        }
+      });
+    });
+  }
+  
+  // Initialize everything when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    // Wait a bit for tsParticles to be fully loaded
+    setTimeout(initParticles, 200);
+    setupCopyButton();
+  });
+</script>

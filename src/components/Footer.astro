@@ -1,0 +1,78 @@
+---
+// src/components/Footer.astro
+// Reusable footer component for consistent branding across the site
+---
+
+<footer class="relative z-10 bg-dark-deepest/80 backdrop-blur border-t border-royal-primary/20 py-8 mt-auto">
+  <div class="container mx-auto px-4">
+    <div class="footer-content">
+      
+      <!-- Copyright -->
+      <div class="text-center">
+        <p class="text-text-muted text-sm">
+          © 2025 Mint Network. All rights reserved.
+        </p>
+      </div>
+      
+      <!-- Mobile Divider -->
+      <div class="mobile-divider"></div>
+      
+      <!-- Legal Links -->
+      <div class="legal-links">
+        <a href="/legal/community-guidelines" class="text-text-muted hover:text-text-secondary transition-colors">
+          Community Guidelines
+        </a>
+        <a href="/legal/privacy-policy" class="text-text-muted hover:text-text-secondary transition-colors">
+          Privacy Policy
+        </a>
+        <a href="/legal/store-policies" class="text-text-muted hover:text-text-secondary transition-colors">
+          Store Policies
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Footer Responsive Layout */
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .mobile-divider {
+    width: 8rem; /* w-32 equivalent */
+    height: 0.25rem; /* h-1 equivalent */
+    background: linear-gradient(135deg, #9a0aab 0%, #b83cc7 50%, #c45adb 100%); /* bg-gradient-royal */
+    border-radius: 9999px; /* rounded-full */
+  }
+  
+  .legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.5rem; /* row-gap column-gap */
+    font-size: 0.875rem; /* text-sm */
+  }
+  
+  /* Desktop layout */
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    
+    .mobile-divider {
+      display: none;
+    }
+    
+    .legal-links {
+      gap: 1.5rem;
+      flex-wrap: nowrap;
+    }
+  }
+</style>
