@@ -1,0 +1,65 @@
+name: Build and Publish Site
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+# Explicitly add permissions needed for GitHub Pages deployment
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch all history for proper Git commits
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install Dependencies
+      # Follow error message instructions to fix Rollup issues
+      run: |
+        rm -rf node_modules package-lock.json
+        npm install
+        # Explicitly install ONLY the glibc version - GitHub runners use glibc not musl
+        npm install @rollup/rollup-linux-x64-gnu
+
+    - name: Build Site
+      run: |
+        # First try normal build
+        echo "Building site with Astro..."
+        mkdir -p dist  # Ensure dist directory exists
+        npx astro build || (
+          echo "Build failed, attempting to fix Rollup issue and retry..."
+          # If failed, try reinstalling specific dependency and rebuilding
+          npm install @rollup/rollup-linux-x64-gnu --no-save
+          npx astro build
+        )
+        
+        # Verify the build output exists
+        if [ ! -d "dist" ] || [ -z "$(ls -A dist)" ]; then
+          echo "Error: dist directory is empty or does not exist after build"
+          exit 1
+        fi
+      
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        cname: mint-network.co
+        force_orphan: true
