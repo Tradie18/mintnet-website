@@ -122,7 +122,7 @@ const NEW_TAB_SITES = [
   }
 ];
 
-const GuidedVotingFlow = () => {
+const GuidedVotingFlow = ({ logoSrc }) => {
   const [currentSiteIndex, setCurrentSiteIndex] = useState(0);
   const [completedSites, setCompletedSites] = useState(() => {
     const saved = localStorage.getItem('mint-voting-completed');
@@ -395,6 +395,7 @@ const GuidedVotingFlow = () => {
       <BonusVotingPhase 
         completedCount={completedSites.length}
         onComplete={() => setVotingPhase('complete')}
+        logoSrc={logoSrc}
       />
     );
   }
@@ -412,7 +413,7 @@ const GuidedVotingFlow = () => {
           {/* Left Section - Logo & Title */}
           <div className="flex items-center gap-3 md:gap-4">
             <img 
-              src="/src/assets/images/logo_mini.png" 
+              src={logoSrc} 
               alt="Mint Network" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-lg shadow-md"
             />
@@ -512,7 +513,7 @@ const GuidedVotingFlow = () => {
   );
 };
 
-const BonusVotingPhase = ({ completedCount, onComplete }) => {
+const BonusVotingPhase = ({ completedCount, onComplete, logoSrc }) => {
   const handleBonusVote = (siteUrl) => {
     if (DEBUG_VOTING) console.log('🎁 Opening bonus site:', siteUrl);
     window.open(siteUrl, '_blank');
@@ -592,7 +593,7 @@ const BonusVotingPhase = ({ completedCount, onComplete }) => {
           <div className="text-center mb-8 md:mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
               <img 
-                src="/src/assets/images/logo_mini.png" 
+                src={logoSrc} 
                 alt="Mint Network" 
                 className="w-10 h-10 md:w-12 md:h-12 rounded-lg"
               />

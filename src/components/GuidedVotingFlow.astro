@@ -3,6 +3,21 @@
 // Astro wrapper for the React voting flow component
 
 import GuidedVotingFlowReact from './GuidedVotingFlow.jsx';
+import { getImage } from 'astro:assets';
+import mintNetworkLogoMini from '../assets/images/logo_mini.png';
+
+// Generate optimized image URL for the logo
+const optimizedLogo = await getImage({
+  src: mintNetworkLogoMini,
+  width: 80,
+  height: 80,
+  format: 'webp',
+  quality: 90,
+  densities: [1, 2, 3]
+});
+
+// Get the source URL for the optimized image
+const logoSrc = optimizedLogo.src;
 ---
 
-<GuidedVotingFlowReact client:only="react" />
+<GuidedVotingFlowReact logoSrc={logoSrc} client:only="react" />
