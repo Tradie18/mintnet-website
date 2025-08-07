@@ -17,7 +17,7 @@ const IFRAME_VOTING_SITES = [
   {
     id: 'minecraftservers-org',
     name: 'MinecraftServers.org',
-    url: 'https://minecraftservers.org/vote/221843', // Hypixel's ID - working
+    url: 'https://minecraftservers.org/vote/677258', // Hypixel's ID - working
     rewards: '500 Coins + Vote Key',
     estimatedTime: '30s',
     priority: 1
@@ -25,7 +25,7 @@ const IFRAME_VOTING_SITES = [
   {
     id: 'minecraft-mp',
     name: 'Minecraft-MP.com', 
-    url: 'https://minecraft-mp.com/server/81821/vote/', // Hypixel's ID - working
+    url: 'https://minecraft-mp.com/server/347108/vote/', // Hypixel's ID - working
     rewards: '300 Coins + Vote Key',
     estimatedTime: '45s',
     priority: 2
@@ -57,7 +57,7 @@ const IFRAME_VOTING_SITES = [
   {
     id: 'topg-minecraft',
     name: 'TopG Minecraft',
-    url: 'https://topg.org/Minecraft/in-405637', // Hypixel's ID - working
+    url: 'https://topg.org/minecraft-servers/server-674826#vote', // Hypixel's ID - working
     rewards: '300 Coins + Vote Key',
     estimatedTime: '35s',
     priority: 6
@@ -93,12 +93,12 @@ const NEW_TAB_SITES = [
   { 
     name: 'Planet Minecraft', 
     rewards: '150 Coins', 
-    url: 'https://www.planetminecraft.com/server/hypixel/'
+    url: 'https://www.planetminecraft.com/server/mint-network/vote/'
   },
   { 
     name: 'Minecraft Server List', 
     rewards: '100 Coins', 
-    url: 'https://minecraft-server-list.com/server/292028/vote/' // Hypixel
+    url: 'https://minecraft-server-list.com/server/513843/vote/' // Hypixel
   },
   { 
     name: 'Minecraft Buzz', 
