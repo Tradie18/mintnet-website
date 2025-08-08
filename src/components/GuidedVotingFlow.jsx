@@ -12,20 +12,20 @@ import { ExternalLink, CheckCircle } from 'lucide-react';
 // Debug flag - set to true to enable console logging
 const DEBUG_VOTING = false;
 
-// Voting sites with iframe compatibility (using real working URLs from our analysis)
+// Voting sites with iframe (embed) compatibility
 const IFRAME_VOTING_SITES = [
-  {
+  /*{
     id: 'minecraftservers-org',
     name: 'MinecraftServers.org',
-    url: 'https://minecraftservers.org/vote/677258', // Hypixel's ID - working
+    url: 'https://minecraftservers.org/vote/677258',
     rewards: '500 Coins + Vote Key',
     estimatedTime: '30s',
     priority: 1
-  },
+  },*/ // Captcha issues - disabled for now
   {
     id: 'minecraft-mp',
     name: 'Minecraft-MP.com', 
-    url: 'https://minecraft-mp.com/server/347108/vote/', // Hypixel's ID - working
+    url: 'https://minecraft-mp.com/server/347108/vote/',
     rewards: '300 Coins + Vote Key',
     estimatedTime: '45s',
     priority: 2
@@ -33,47 +33,47 @@ const IFRAME_VOTING_SITES = [
   {
     id: 'minecraftlist-org',
     name: 'MinecraftList.org',
-    url: 'https://minecraftlist.org/vote/21507', // ManaCube's ID - working
+    url: 'https://minecraftlist.org/vote/21507', // Placeholder - Needs to be registered
     rewards: '400 Coins + Vote Key',
     estimatedTime: '30s',
     priority: 3
   },
-  {
+  /*{
     id: 'top-minecraft-servers',
     name: 'Top Minecraft Servers',
-    url: 'https://topminecraftservers.org/server/5516', // ManaCube's ID - working
+    url: 'https://topminecraftservers.org/vote/41356', // Placeholder - Needs to be registered
     rewards: '350 Coins + Vote Key',
     estimatedTime: '40s',
     priority: 4
-  },
-  {
+  },*/ // Captcha issues - disabled for now
+  /*{
     id: 'mc-servers-top',
     name: 'MC Servers Top',
-    url: 'https://mcservers.top/server/246', // InvadedLands ID - working
+    url: 'https://mcservers.top/server/246', // Placeholder - Needs to be registered
     rewards: '250 Coins + Vote Key',
     estimatedTime: '25s',
     priority: 5
-  },
-  {
+  },*/ // Voting flow issues - disabled for now
+  /*{
     id: 'topg-minecraft',
     name: 'TopG Minecraft',
-    url: 'https://topg.org/minecraft-servers/server-674826#vote', // Hypixel's ID - working
+    url: 'https://topg.org/minecraft-servers/server-674826#vote',
     rewards: '300 Coins + Vote Key',
     estimatedTime: '35s',
     priority: 6
-  },
+  },*/ // Captcha issues - disabled for now
   {
     id: 'minecraft-best-servers',
     name: 'Minecraft Best Servers',
-    url: 'https://minecraftbestservers.com/server-complex.4967/', // Complex Gaming - working
+    url: 'https://minecraftbestservers.com/server-mint-network.5484/vote',
     rewards: '200 Coins + Vote Key',
-    estimatedTime: '30s',
+    estimatedTime: '45s',
     priority: 7
   },
   {
     id: 'minecraft-co',
     name: 'Minecraft.co.com',
-    url: 'https://minecraft.co.com/server/manacube/vote', // ManaCube - working
+    url: 'https://minecraft.co.com/server/manacube/vote', // Placeholder - Needs to be registered
     rewards: '250 Coins + Vote Key',
     estimatedTime: '40s',
     priority: 8
@@ -81,14 +81,14 @@ const IFRAME_VOTING_SITES = [
   {
     id: 'servers-minecraft-net',
     name: 'Servers-Minecraft.net',
-    url: 'https://servers-minecraft.net/server-complex-gaming-1-21.58/vote', // Complex Gaming - working
+    url: 'https://servers-minecraft.net/server-complex-gaming-1-21.58/vote', // Placeholder - Needs to be registered
     rewards: '300 Coins + Vote Key',
     estimatedTime: '35s',
     priority: 9
   }
 ];
 
-// Bonus sites that require new tabs (using real URLs from our testing)
+// Bonus sites that require new tabs
 const NEW_TAB_SITES = [
   { 
     name: 'Planet Minecraft', 
@@ -98,27 +98,27 @@ const NEW_TAB_SITES = [
   { 
     name: 'Minecraft Server List', 
     rewards: '100 Coins', 
-    url: 'https://minecraft-server-list.com/server/513843/vote/' // Hypixel
+    url: 'https://minecraft-server-list.com/server/513843/vote/'
   },
   { 
     name: 'Minecraft Buzz', 
     rewards: '125 Coins', 
-    url: 'https://minecraft.buzz/vote/4223' // Complex Gaming
+    url: 'https://minecraft.buzz/vote/4223' // Placeholder - Needs to be registered
   },
   { 
     name: 'Best Minecraft Servers', 
     rewards: '100 Coins', 
-    url: 'https://best-minecraft-servers.co/server-hypixel.8612/vote'
+    url: 'https://best-minecraft-servers.co/server-hypixel.8612/vote' // Placeholder - Needs to be registered
   },
   { 
     name: 'Play Minecraft Servers', 
     rewards: '75 Coins', 
-    url: 'https://play-minecraft-servers.com/minecraft-servers/complex-gaming/?tab=vote'
+    url: 'https://play-minecraft-servers.com/minecraft-servers/complex-gaming/?tab=vote' // Placeholder - Needs to be registered
   },
   { 
     name: 'MC Server List', 
     rewards: '100 Coins', 
-    url: 'https://mc-server-list.com/server/189-hypixel/vote/'
+    url: 'https://mc-server-list.com/server/189-hypixel/vote/' // Placeholder - Needs to be registered
   }
 ];
 
